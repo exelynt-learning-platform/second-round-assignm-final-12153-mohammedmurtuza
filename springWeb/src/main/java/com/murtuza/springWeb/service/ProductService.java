@@ -1,15 +1,15 @@
 package com.murtuza.springWeb.service;
 
-import com.murtuza.springWeb.model.Product;
-import com.murtuza.springWeb.repository.ProductRepo;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.io.IOException;
+import java.util.List;
+
+import org.springframework.data.repository.query.Param;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.murtuza.springWeb.model.Product;
+import com.murtuza.springWeb.repository.ProductRepo;
 
 
 
@@ -33,7 +33,7 @@ public class  ProductService {
 
     public Product addProduct(Product product, MultipartFile imageFile)
         throws IOException {
-            product.setImageName(imageFile.getOriginalFilename());
+
             product.setImageName(imageFile.getOriginalFilename());
             product.setImageType(imageFile.getContentType());
             product.setImageDate(imageFile.getBytes());
@@ -41,7 +41,63 @@ public class  ProductService {
 
             return repo.save(product);
         }
+
+    public Product updateProduct(int id, Product product, MultipartFile imageFile) throws IOException {
+        // First, check if the product exists
+        Product existingProduct = repo.findById(id).orElse(null);
+        if (existingProduct == null) {
+            throw new RuntimeException("Product with ID " + id + " not found");
+        }
+
+        // Update the existing product with new data
+        existingProduct.setName(product.getName());
+        existingProduct.setAbout(product.getAbout());
+        existingProduct.setBrand(product.getBrand());
+        existingProduct.setPrice(product.getPrice());
+        existingProduct.setCate(product.getCate());
+        existingProduct.setReleaseDate(product.getReleaseDate());
+        existingProduct.setAvailable(product.isAvailable());
+        existingProduct.setQuantity(product.getQuantity());
+
+        // Update image only if a new image file is provided
+        if (imageFile != null && !imageFile.isEmpty()) {
+            existingProduct.setImageName(imageFile.getOriginalFilename());
+            existingProduct.setImageType(imageFile.getContentType());
+            existingProduct.setImageDate(imageFile.getBytes());
+        }
+        // If no new image is provided, keep the existing image
+
+        // Save and return the updated product
+        return repo.save(existingProduct);
     }
+
+    // Overloaded method for updating without image
+    public Product updateProduct(int id, Product product) throws IOException {
+        return updateProduct(id, product, null);
+    }
+
+    // Delete product method
+    public boolean deleteProduct(int id) {
+        try {
+            if (repo.existsById(id)) {
+                repo.deleteById(id);
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            throw new RuntimeException("Error deleting product with ID " + id + ": " + e.getMessage());
+        }
+    }
+
+    public List<Product> searchProduct(@Param("keyword") String keyword) {
+        return repo.searchProducts(keyword);
+    }
+
+
+//    public List<Product> searchProduct(String keyword) {
+//       return repo.searchProduct(keyword);
+//    }
+}
 //    @Autowired
 //    ProductRepo repo;
 

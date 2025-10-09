@@ -75,14 +75,14 @@ function AddProduct() {
   }
 
   return (
-    <div className='bg-gray-50 min-h-screen flex flex-col items-center justify-center'>
+    <div className='bg-[rgb(56,58,60)] min-h-screen flex flex-col items-center justify-center'>
       <Link to="/card" className="mb-4 text-3xl text-blue-600 hover:underline">
         Back to Products
       </Link>
       <div className="bg-white rounded-lg shadow-lg p-5 w-full max-w-md">
         <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Add New Product</h2>
         <form className="space-y-4" onSubmit={handleSubmit}>
-
+    
         <input
           type="text"
           placeholder="Product Name"

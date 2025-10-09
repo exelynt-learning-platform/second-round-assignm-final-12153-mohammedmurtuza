@@ -5,7 +5,9 @@ import Card from './component/Card'
 import About from './component/About'
 import ProductDetail from './component/ProductDetail'
 import AddProduct from './component/AddProduct'
+import UpdateProduct from './component/UpdateProduct'
 import Home from './component/Home'
+import DeleteProduct from './component/DeleteProduct'
 
 function App() {
   const [theme, setTheme] = useState('dark');
@@ -34,6 +36,8 @@ function App() {
           <Route path="/card" element={<Card />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/addProduct" element={<AddProduct />} />
+          <Route path="/updateProduct/:id" element={<UpdateProduct />} />
+          <Route path="/deleteProduct/:id" element={<DeleteProduct />} />
         </Routes>
       </div>
     </BrowserRouter>

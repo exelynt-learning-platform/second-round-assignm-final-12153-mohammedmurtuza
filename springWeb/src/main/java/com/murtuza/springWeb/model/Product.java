@@ -13,6 +13,98 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Entity
 public class Product {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public String getCate() {
+        return cate;
+    }
+
+    public void setCate(String cate) {
+        this.cate = cate;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    public long getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(long quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public String getImageType() {
+        return imageType;
+    }
+
+    public byte[] getImageDate() {
+        return imageDate;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -25,10 +117,21 @@ public class Product {
     private String releaseDate;
     private boolean available;
     private long quantity;
-    private String ImageName;
+    private String imageName;
     private String imageType;
     @Lob
     private byte[] imageDate;
+    private int likes;
+
+
+    public void setImageName(String originalFilename) {
+    }
+
+    public void setImageDate(byte[] bytes) {
+    }
+
+    public void setImageType(String contentType) {
+    }
 }
 
 //    public Product(int id, String name, int price) {
