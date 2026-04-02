@@ -12,169 +12,53 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "product")
 public class Product {
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAbout() {
-        return about;
-    }
-
-    public void setAbout(String about) {
-        this.about = about;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public String getCate() {
-        return cate;
-    }
-
-    public void setCate(String cate) {
-        this.cate = cate;
-    }
-
-    public String getReleaseDate() {
-        return releaseDate;
-    }
-
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public void setAvailable(boolean available) {
-        this.available = available;
-    }
-
-    public long getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(long quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getImageName() {
-        return imageName;
-    }
-
-    public String getImageType() {
-        return imageType;
-    }
-
-    public byte[] getImageDate() {
-        return imageDate;
-    }
-
-    public int getLikes() {
-        return likes;
-    }
-
-    public void setLikes(int likes) {
-        this.likes = likes;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String name;
     private String about;
     private String brand;
+
+    @Column(precision = 12, scale = 2)
     private BigDecimal price;
-    private String cate;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy")
+
+    // keep old DB column name if already created
+    @Column(name = "categary")
+    private String category;
+
+    // if you keep String date, JsonFormat is optional
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private String releaseDate;
+
     private boolean available;
     private long quantity;
+
     private String imageName;
     private String imageType;
+
     @Lob
-    private byte[] imageDate;
+    private byte[] imageData;
+
     private int likes;
 
-
-    public void setImageName(String originalFilename) {
+    // ---- backward-compatible helper methods (if old code uses cate/imageDate names) ----
+    public String getCate() {
+        return this.category;
     }
 
-    public void setImageDate(byte[] bytes) {
+    public void setCate(String cate) {
+        this.category = cate;
     }
 
-    public void setImageType(String contentType) {
+    public byte[] getImageDate() {
+        return this.imageData;
+    }
+
+    public void setImageDate(byte[] imageDate) {
+        this.imageData = imageDate;
     }
 }
-
-//    public Product(int id, String name, int price) {
-//        this.id = id;
-//        this.name = name;
-//        this.price = price;
-//    }
-//
-//    public Product() {
-//
-//    }
-//
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
-//
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//
-//    @Override
-//    public String toString() {
-//        return "Product{" +
-//                "id=" + id +
-//                ", name='" + name + '\'' +
-//                ", price=" + price +
-//                '}';
-//    }
-//
-//    public int getPrice() {
-//        return price;
-//    }
-//
-//    public void setPrice(int price) {
-//        this.price = price;
-//    }
-//}
-

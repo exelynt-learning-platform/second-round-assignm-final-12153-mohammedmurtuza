@@ -26,6 +26,8 @@ function Card() {
             });
     }, []);
 
+    
+
     return (
         <>
             <div className="min-h-screen bg-gray-950 relative overflow-hidden">
@@ -134,5 +136,6 @@ function Card() {
         </>
     )
 }
+
 
 export default Card

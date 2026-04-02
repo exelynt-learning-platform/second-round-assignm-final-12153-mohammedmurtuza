@@ -2,7 +2,6 @@ package com.murtuza.springWeb.controller;
 
 import java.util.List;
 
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,19 +32,19 @@ public class ProductController {
         return "hi there";
     }
 
-    @GetMapping("/Products")
+    @GetMapping("/products")
     public List<Product> getAllProducts() {
         System.out.println("working on getAllProducts");
         return service.getAllProducts();
     }
 
-    @GetMapping("/Products/{id}")
+    @GetMapping("/products/{id}")
     public Product getProducts(@PathVariable int id) {
         System.out.println("working on getProducts");
         return service.getProducts(id);
     }
 
-    @PostMapping("/Product")
+    @PostMapping("/products")
     public ResponseEntity<?> addProduct(
             @RequestPart Product product,
             @RequestPart MultipartFile imageFile) {
@@ -60,7 +59,7 @@ public class ProductController {
     }
 
 
-    @PutMapping("/Product/{id}")
+    @PutMapping("/products/{id}")
     public ResponseEntity<?> updateProduct(
             @PathVariable int id,
             @RequestPart Product product,
@@ -74,8 +73,7 @@ public class ProductController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    @DeleteMapping("/Product/{id}")
+    @DeleteMapping("/products/{id}")
     public ResponseEntity<?> deleteProduct(@PathVariable int id){
         System.out.println("working on delete api");
 
@@ -90,15 +88,18 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/Products/search")
+
+    @GetMapping("/products/search")
     public ResponseEntity<List<Product>>searchProduct(@RequestParam String keyword){
         System.out.println("working on a search feature");
             List<Product> searchProduct1 =  service.searchProduct(keyword);
         return new ResponseEntity<>(searchProduct1, HttpStatus.OK);
     }
 
+
     @GetMapping("/csrf-token")
     public CsrfToken getCsrfToken(HttpServletRequest request) {
+
         return (CsrfToken) request.getAttribute("_csrf");
 
     }

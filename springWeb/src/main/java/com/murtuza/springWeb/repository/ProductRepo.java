@@ -13,8 +13,7 @@ public interface ProductRepo extends JpaRepository<Product, Integer> {
     //jpql (Java Persistance query language)
     @Query("SELECT p FROM Product p WHERE " +
             "LOWER(p.name) LIKE CONCAT('%', :keyword, '%') OR " +
-            "LOWER(p.brand) LIKE CONCAT('%', :keyword, '%') OR " +
-            "LOWER(p.cate) LIKE CONCAT('%', :keyword, '%')")
+        "LOWER(p.brand) LIKE CONCAT('%', :keyword, '%')")
 
     List<Product> searchProducts(@Param("keyword") String keyword);
 

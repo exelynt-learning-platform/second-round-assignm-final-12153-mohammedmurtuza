@@ -2,10 +2,12 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function Home() {
+function  Home() {
   const navigate = useNavigate();
+
+
   return (
-    <div className="min-h-screen min-h-screen bg-gray-900">
+    <div className=" min-h-screen bg-gray-900">
       <div className="max-w-6xl mx-auto"> 
         {/* Hero Section */}
         <div className="text-center m-30 p-60">

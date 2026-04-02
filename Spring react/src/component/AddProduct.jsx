@@ -75,7 +75,7 @@ function AddProduct() {
   }
 
   return (
-    <div className='bg-[rgb(56,58,60)] min-h-screen flex flex-col items-center justify-center'>
+    <div className='bg-[rgb(56,58,60)] min-h-screen flex flex-col items-center '>
       <Link to="/card" className="mb-4 text-3xl text-blue-600 hover:underline">
         Back to Products
       </Link>

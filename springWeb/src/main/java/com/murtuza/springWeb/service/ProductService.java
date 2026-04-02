@@ -13,18 +13,24 @@ import com.murtuza.springWeb.repository.ProductRepo;
 
 
 
+
 @Service
 public class  ProductService {
 
+
     private ProductRepo repo;
+
 
     public ProductService(ProductRepo repo) {
         this.repo = repo;
     }
 
+
+
     public List<Product> getAllProducts() {
         return repo.findAll();
     }
+
 
     public Product getProducts(int id) {
         return repo.findById(id).orElse(new Product());
